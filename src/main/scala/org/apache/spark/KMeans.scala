@@ -27,6 +27,8 @@ import org.apache.spark.ml.feature.{VectorAssembler, StringIndexer}
 import org.apache.spark.ml.recommendation.ALS
 import org.apache.spark.sql.types._
 
+import org.apache.spark.ml.feature.StandardScaler
+
 // $example off$
 import org.apache.spark.sql.SparkSession
 
@@ -87,14 +89,31 @@ object KMeans {
     val assembler = new VectorAssembler()
       .setInputCols(Array("mpg", "cyl", "disp", "hp", "drat", "wt"))
       .setOutputCol("features")
-
-    val assemdata = assembler.transform(ds)
-
-    // Trains a k-means model
-    val kmeans = new KMeans()
-      .setK(10)
-      .setFeaturesCol("features")
-      .setPredictionCol("prediction")
+      
+      val assemdata = assembler.transform(ds)
+       
+     val scaled = new StandardScaler()
+       .setInputCol("features")
+       .setOutputCol("scaledFeatures")
+       .setWithStd(true)
+       .setWithMean(true)
+ 
+     // Compute summary statistics by fitting the StandardScaler.
+     val scalerModel = scaled.fit(assemdata)
+ 
+     // Normalize each feature to have unit standard deviation.
+     val scaledData = scalerModel.transform(assemdata)
+  
+     val clusters = 10
+      // Trains a k-means model
+     val kmeans = new KMeans()
+       .setK(clusters)
+       .setMaxIter(1000)
+       .setFeaturesCol("scaledFeatures")
+       .setPredictionCol("prediction")
+       
+    val model = kmeans.fit(scaledData)
+  
     val model = kmeans.fit(assemdata)
 
     // Evaluate clustering by computing Within Set Sum of Squared Errors.
@@ -108,6 +127,13 @@ object KMeans {
     // predict
     val predict = model.transform(assemdata)
     predict.show(1000)
+    
+    for (i <- 0 to clusters) { 
+      predict.filter(col("prediction") === i)
+       .select(col("_c0"), col("features"), col("prediction"))
+       .collect
+       .foreach(println)
+    }
 
     spark.stop()
   }
