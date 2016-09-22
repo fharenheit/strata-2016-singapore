@@ -54,7 +54,7 @@ object LinearRegressionWithEncoding {
 
  def main (args: Array[String]) {
 
-   var input = "data/housing/Housing.csv"
+   var input = "data/Housing.csv"
    if (args.length > 0) {
      input = args(0)
    }
