@@ -35,10 +35,8 @@ package com.cloudera.spark
  */
 
 import org.apache.spark.ml.feature.{CountVectorizer, RegexTokenizer, StopWordsRemover}
-import org.apache.spark.mllib.clustering.{LDA, OnlineLDAOptimizer}
+import org.apache.spark.ml.clustering._
 import org.apache.spark.{SparkContext, SparkConf}
-import org.apache.spark.mllib.linalg.{Vector, Vectors}
-import org.apache.spark.ml.feature.{CountVectorizer, RegexTokenizer, StopWordsRemover}
 import org.apache.spark.sql._
 /**
   * Infer the cluster topics on a set of 20 newsgroup data.
@@ -100,9 +98,6 @@ object TopicModeling {
     val countVectors = cvModel
                         .transform(filteredTokens)
                         .select("docId", "features")
-                        .map {
-                            case Row(docId: Long, countVector: Vector) => (docId, countVector)
-                        }.cache()
 
     val mbf = {
       val corpusSize = countVectors.count()
@@ -110,15 +105,12 @@ object TopicModeling {
     }
 
     val lda = new LDA()
-                  .setOptimizer(new OnlineLDAOptimizer()
-                  .setMiniBatchFraction(math.min(1.0, mbf)))
+                  .setOptimizer("online")
                   .setK(numTopics)
-                  .setMaxIterations(30)
-                  .setDocConcentration(-1)
-                  .setTopicConcentration(-1)
+                  .setMaxIterations(maxIterations)
 
     val startTime = System.nanoTime()
-    val ldaModel = lda.run(countVectors)
+    val ldaModel = lda.fit(countVectors)
     val elapsed = (System.nanoTime() - startTime) / 1e9
 
     println(s"Finished training LDA model.  Summary:")
