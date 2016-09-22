@@ -52,8 +52,8 @@ object TopicModeling {
 
 	def main (args: Array[String]) {
 
-    var inputDir = "data/topicmodeling/newsgroup_20/"
-    var stopWordFile = "data/topicmodeling/stopwords.txt"
+    val inputDir = "data/topicmodeling/newsgroup_20/"
+    val stopWordFile = "data/topicmodeling/stopwords.txt"
 
     if(args.length > 1) {
       inputDir = args(0)
