@@ -1,9 +1,9 @@
 
 <project>
-  <groupId>com.spark.mllib</groupId>
-  <artifactId>spark-mllib</artifactId>
+  <groupId>com.spark.strata</groupId>
+  <artifactId>spark-strata</artifactId>
   <modelVersion>4.0.0</modelVersion>
-  <name>MLlib-GraphX</name>
+  <name>strata-nyc-2016</name>
   <packaging>jar</packaging>
   <version>1.0</version>
 
