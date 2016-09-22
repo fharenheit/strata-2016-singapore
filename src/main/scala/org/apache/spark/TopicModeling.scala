@@ -50,7 +50,7 @@ object TopicModeling {
 
 	def main (args: Array[String]) {
 
-    val inputDir = "data/topicmodeling/newsgroup_20/"
+    val inputDir = "data/topicmodeling/newsgroup_new/"
     val stopWordFile = "data/topicmodeling/stopwords.txt"
 
     if(args.length > 1) {
