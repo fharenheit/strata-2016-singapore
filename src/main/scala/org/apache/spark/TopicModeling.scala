@@ -110,7 +110,7 @@ object TopicModeling {
                   .setMaxIterations(maxIterations)
 
     val startTime = System.nanoTime()
-    val ldaModel = lda.fit(countVectors)
+    val ldaModel = lda.fit(countVectors.repartition(20))
     val elapsed = (System.nanoTime() - startTime) / 1e9
 
     println(s"Finished training LDA model.  Summary:")
