@@ -119,15 +119,22 @@ object TopicModeling {
 
     val topicIndices = ldaModel.describeTopics(maxTermsPerTopic = 10)
     val vocabArray = cvModel.vocabulary
-    val topics = topicIndices.map {
-                  case (terms, termWeights) =>
-                  terms.map(vocabArray(_)).zip(termWeights)
+    
+    for(i <- topicIndices) { println(s"Topic ${i(0)}")
+     val a: Array[Int] = i(1).asInstanceOf[scala.collection.mutable.WrappedArray[Int]].toSeq.toArray
+     val b: Array[Double] = i(2).asInstanceOf[scala.collection.mutable.WrappedArray[Double]].toSeq.toArray
+     a.map(vocabArray(_)).zip(b).foreach { case (term, weight) => println(s"$term\t$weight") }
+     println(s"==================")
     }
+   // val topics = topicIndices.map {
+   //               case (terms, termWeights) =>
+   //               terms.map(vocabArray(_)).zip(termWeights)
+   // }
 
-    topics.zipWithIndex.foreach {
-          case (topic, i) => println(s"TOPIC $i")
-          topic.foreach { case (term, weight) => println(s"$term\t$weight") }
-          println(s"==========")
-    }
+    //topics.zipWithIndex.foreach {
+      //    case (topic, i) => println(s"TOPIC $i")
+      //    topic.foreach { case (term, weight) => println(s"$term\t$weight") }
+      //    println(s"==========")
+    //}
   }
 }
