@@ -67,9 +67,12 @@ object LinearRegressionWithEncoding {
       
   import spark.implicits._
 
-  val data = spakrk.sparkContext.textFile(input).map(_.split(","))
-               .map( x => ( X(
-                 x(0), x(1).toDouble, x(2).toDouble, x(3).toDouble, x(4).toDouble, x(5).toDouble, x(6), x(7), x(8), x(9), x(10), x(11).toDouble, x(12) ))).toDF()
+  val data = spark.sparkContext.textFile(input)
+      .map(_.split(","))
+      .map( x => ( X(
+                 x(0), x(1).toDouble, x(2).toDouble, x(3).toDouble, x(4).toDouble, x(5).toDouble,
+                 x(6), x(7), x(8), x(9), x(10), x(11).toDouble, x(12) )))
+      .toDF()
 
    val categoricalVariables = Array("driveway","recroom", "fullbase", "gashw", "airco", "prefarea")
 
