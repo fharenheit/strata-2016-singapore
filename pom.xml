@@ -110,7 +110,7 @@
           </execution>
         </executions>
         <configuration>
-          <scalaVersion>2.10.4</scalaVersion>
+          <scalaVersion>${scala.version}</scalaVersion>
         </configuration>
       </plugin>
 
