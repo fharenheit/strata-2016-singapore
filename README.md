@@ -1,4 +1,4 @@
-# strata-2016-ny
+# Strata-2016-NYC
 
 ## Pre-requisites for Installation
 
