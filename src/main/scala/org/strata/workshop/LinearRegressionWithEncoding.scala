@@ -59,9 +59,13 @@ object LinearRegressionWithEncoding {
      input = args(0)
    }
 
-
-   val sparkConf = new SparkConf().setAppName("LinearRegressionWithEncoding")
-   com.cloudera.spark.mllib.SparkConfUtil.setConf(sparkConf)
+   val spark = SparkSession
+      .builder
+      .appName("LinearRegressionWithEncoding")
+      .master("local")
+      .getOrCreate()
+      
+    import spark.implicits._
 
    val sc = new SparkContext(sparkConf)
 
