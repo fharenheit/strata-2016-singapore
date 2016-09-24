@@ -50,8 +50,8 @@ object TopicModelingExample {
 
 	def main (args: Array[String]) {
 
-    val inputDir = "data/topicmodeling/newsgroup_new/"
-    val stopWordFile = "data/topicmodeling/stopwords.txt"
+    var inputDir = "data/topicmodeling/newsgroup_new/"
+    var stopWordFile = "data/topicmodeling/stopwords.txt"
 
     if(args.length > 1) {
       inputDir = args(0)
@@ -81,7 +81,7 @@ object TopicModelingExample {
                   .setOutputCol("words")
                   .transform(docDF)
 
-    val stopwords = sc.textFile(stopWordFile).collect
+    val stopwords = spark.sparkContext.textFile(stopWordFile).collect
     val filteredTokens = new StopWordsRemover()
                           .setStopWords(stopwords)
                           .setCaseSensitive(false)
