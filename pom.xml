@@ -1,6 +1,6 @@
 
 <project>
-  <groupId>com.spark.strata</groupId>
+  <groupId>org.strata.workshop</groupId>
   <artifactId>spark-strata</artifactId>
   <modelVersion>4.0.0</modelVersion>
   <name>strata-nyc-2016</name>
