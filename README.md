@@ -1,6 +1,6 @@
 # strata-2016-ny
 
-## Pre-requisites
+## Pre-requisites for Installation
 
 Java installed on the laptop
 
