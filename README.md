@@ -26,5 +26,13 @@ tar -zxvf spark-2.0.0-bin-hadoop2.7.tgz
 
 Nice to have
 
+[IMPORTANT]: Downloads
+Have the following downloaded before the session
+* Spark binaries
+* JDK installed (> 1.7.x)
+* https://github.com/WhiteFangBuck/strata-2016-ny
+
+
+
 
 
