@@ -31,7 +31,7 @@ import org.apache.spark.sql.SparkSession
  * bin/run-example ml.ALSExample
  * }}}
  */
-object ALS {
+object ALSExample {
 
   // $example on$
   case class Rating(userId: Int, movieId: Int, rating: Float, timestamp: Long)
