@@ -35,12 +35,12 @@ import org.apache.spark.ml.feature.StandardScaler
 import org.apache.spark.sql.SparkSession
 
 // https://forge.scilab.org/index.php/p/rdataset/source/tree/master/csv/datasets/mtcars.csv
-object KMeans {
+object KMeansExample {
 
   def main(args: Array[String]) {
     val spark = SparkSession
       .builder
-      .appName("KMeans")
+      .appName("KMeansExample")
       .master("local")
       .getOrCreate()
     import spark.implicits._
