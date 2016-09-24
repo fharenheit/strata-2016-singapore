@@ -16,7 +16,7 @@
  */
 
 // scalastyle:off println
-package org.apache.spark
+package org.strata.workshop
 
 // $example on$
 import org.apache.spark.ml.evaluation.RegressionEvaluator
