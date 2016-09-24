@@ -31,12 +31,12 @@ import org.apache.spark.ml.evaluation.BinaryClassificationEvaluator
 import org.apache.spark.sql.SparkSession
 
 
-object Spam {
+object SpamExample {
 
   def main(args: Array[String]) {
     val spark = SparkSession
       .builder
-      .appName("Spam")
+      .appName("SpamExample")
       .master("local")
       .getOrCreate()
     import spark.implicits._
