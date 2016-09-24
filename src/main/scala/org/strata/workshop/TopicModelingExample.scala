@@ -57,20 +57,20 @@ object TopicModelingExample {
       inputDir = args(0)
       stopWordFile = args(1)
     }
-
-    val sparkConf = new SparkConf().setAppName("TopicModelingExample")
-    com.cloudera.spark.mllib.SparkConfUtil.setConf(sparkConf)
-    val sc = new SparkContext(sparkConf)
+    
+    val spark = SparkSession
+      .builder
+      .appName("TopicModelingExample")
+      .master("local")
+      .getOrCreate()
+      
+    import spark.implicits._
 
     val numTopics: Int = 10
     val maxIterations: Int = 100
     val vocabSize: Int = 10000
 
-    val sqlContext = new org.apache.spark.sql.SQLContext(sc)
-
-    import sqlContext.implicits._
-
-    val rawTextRDD = sc.wholeTextFiles(inputDir).map(_._2)
+    val rawTextRDD = spark.sparkContext.wholeTextFiles(inputDir).map(_._2)
     val docDF = rawTextRDD
                   .zipWithIndex.toDF("text", "docId")
     val tokens = new RegexTokenizer()
