@@ -20,11 +20,8 @@ package org.strata.workshop
 
 // $example on$
 
-import org.apache.spark.ml.classification.RandomForestClassifier
 import org.apache.spark.ml.clustering.KMeans
-import org.apache.spark.ml.evaluation.{BinaryClassificationEvaluator, RegressionEvaluator}
 import org.apache.spark.ml.feature.{VectorAssembler, StringIndexer}
-import org.apache.spark.ml.recommendation.ALS
 import org.apache.spark.sql.types._
 
 import org.apache.spark.sql.{SQLContext, _}
@@ -38,11 +35,13 @@ import org.apache.spark.sql.SparkSession
 object KMeansExample {
 
   def main(args: Array[String]) {
+    
     val spark = SparkSession
       .builder
       .appName("KMeansExample")
       .master("local")
       .getOrCreate()
+      
     import spark.implicits._
 
     val customSchema = StructType(Array(
