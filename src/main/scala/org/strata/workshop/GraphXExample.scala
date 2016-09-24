@@ -9,7 +9,7 @@ import org.apache.spark.sql.SparkSession
 /**
  * Created by jayantshekhar on 9/16/16.
  */
-object GraphX {
+object GraphXExample {
 
   def main(args: Array[String]): Unit = {
 
