@@ -65,15 +65,9 @@ object LinearRegressionWithEncoding {
       .master("local")
       .getOrCreate()
       
-    import spark.implicits._
+  import spark.implicits._
 
-   val sc = new SparkContext(sparkConf)
-
-   val sqlContext = new org.apache.spark.sql.SQLContext(sc)
-
-   import sqlContext.implicits._
-
-  val data = sc.textFile(input).map(_.split(","))
+  val data = spakrk.sparkContext.textFile(input).map(_.split(","))
                .map( x => ( X(
                  x(0), x(1).toDouble, x(2).toDouble, x(3).toDouble, x(4).toDouble, x(5).toDouble, x(6), x(7), x(8), x(9), x(10), x(11).toDouble, x(12) ))).toDF()
 
