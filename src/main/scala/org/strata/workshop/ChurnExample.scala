@@ -29,12 +29,12 @@ import org.apache.spark.sql.types._
 import org.apache.spark.sql.SparkSession
 
 
-object Churn {
+object ChurnExample {
 
   def main(args: Array[String]) {
     val spark = SparkSession
       .builder
-      .appName("ALSExample")
+      .appName("ChurnExample")
       .master("local")
       .getOrCreate()
 
