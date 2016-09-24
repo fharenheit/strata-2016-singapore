@@ -107,7 +107,7 @@ object TopicModeling {
     val lda = new LDA()
                   .setOptimizer("online")
                   .setK(numTopics)
-                  .setMaxIterations(maxIterations)
+                  .setMaxIter(maxIterations)
 
     val startTime = System.nanoTime()
     val ldaModel = lda.fit(countVectors.repartition(20))
