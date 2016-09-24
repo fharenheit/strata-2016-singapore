@@ -27,6 +27,8 @@ import org.apache.spark.ml.feature.{VectorAssembler, StringIndexer}
 import org.apache.spark.ml.recommendation.ALS
 import org.apache.spark.sql.types._
 
+import org.apache.spark.sql.{SQLContext, _}
+
 import org.apache.spark.ml.feature.StandardScaler
 
 // $example off$
@@ -114,7 +116,6 @@ object KMeans {
        
     val model = kmeans.fit(scaledData)
   
-    val model = kmeans.fit(assemdata)
 
     // Evaluate clustering by computing Within Set Sum of Squared Errors.
     val WSSSE = model.computeCost(assemdata)
