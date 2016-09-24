@@ -50,7 +50,7 @@ object TopicModelingExample {
 
 	def main (args: Array[String]) {
 
-    var inputDir = "data/topicmodeling/newsgroup_new/"
+    var inputDir = "data/topicmodeling/newsgroup_20/"
     var stopWordFile = "data/topicmodeling/stopwords.txt"
 
     if(args.length > 1) {
