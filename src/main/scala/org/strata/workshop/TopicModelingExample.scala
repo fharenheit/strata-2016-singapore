@@ -46,7 +46,7 @@ import org.apache.spark.sql._
   *
   *
   */
-object TopicModeling {
+object TopicModelingExample {
 
 	def main (args: Array[String]) {
 
@@ -58,7 +58,7 @@ object TopicModeling {
       stopWordFile = args(1)
     }
 
-    val sparkConf = new SparkConf().setAppName("TopicModeeling")
+    val sparkConf = new SparkConf().setAppName("TopicModelingExample")
     com.cloudera.spark.mllib.SparkConfUtil.setConf(sparkConf)
     val sc = new SparkContext(sparkConf)
 
