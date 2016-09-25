@@ -117,7 +117,7 @@ object KMeansExample {
   
 
     // Evaluate clustering by computing Within Set Sum of Squared Errors.
-    val WSSSE = model.computeCost(assemdata)
+    val WSSSE = model.computeCost(scaledData)
     println(s"Within Set Sum of Squared Errors = $WSSSE")
 
     // Shows the result.
@@ -125,7 +125,7 @@ object KMeansExample {
     model.clusterCenters.foreach(println)
 
     // predict
-    val predict = model.transform(assemdata)
+    val predict = model.transform(scaledData)
     predict.show(1000)
     
     for (i <- 0 to clusters) { 
