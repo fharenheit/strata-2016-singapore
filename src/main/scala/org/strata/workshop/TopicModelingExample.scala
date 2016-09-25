@@ -117,7 +117,7 @@ object TopicModelingExample {
     println(s"Training time (sec)\t$elapsed")
     println(s"==========")
 
-    val topicIndices = ldaModel.describeTopics(maxTermsPerTopic = 10)
+    val topicIndices = ldaModel.describeTopics(maxTermsPerTopic = 10).coalesce(1)
     val vocabArray = cvModel.vocabulary
     
     for(i <- topicIndices) { println(s"Topic ${i(0)}")
