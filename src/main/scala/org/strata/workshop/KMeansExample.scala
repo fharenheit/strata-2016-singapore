@@ -44,7 +44,7 @@ object KMeansExample {
       
     import spark.implicits._
 
-    val customSchema = StructType(Array(
+    /** val customSchema = StructType(Array(
       StructField("symboling", StringType, true),
       StructField("normalized-losses", StringType, true),
       StructField("make", StringType, true),
@@ -79,7 +79,7 @@ object KMeansExample {
       StructField("highway-mpg", IntegerType, true),
       StructField("price", IntegerType, true)
 
-    ))
+    ))*/
 
     val ds = spark.read.option("inferSchema", "true").option("header", "true").option("nullValue", "?").csv("data/mtcars.csv")
 
