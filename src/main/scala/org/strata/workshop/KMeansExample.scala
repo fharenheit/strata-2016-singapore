@@ -129,10 +129,12 @@ object KMeansExample {
     predict.show(1000)
     
     for (i <- 0 to clusters) { 
-      predict.filter(col("prediction") === i)
+        val predictionsPerCol = predict.filter(col("prediction") === i)
+        println(s"Cluster $i)
        .select(col("_c0"), col("features"), col("prediction"))
        .collect
        .foreach(println)
+       println("======================================================")
     }
 
     spark.stop()
