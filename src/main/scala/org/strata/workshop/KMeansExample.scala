@@ -130,7 +130,7 @@ object KMeansExample {
     
     for (i <- 0 to clusters) { 
         val predictionsPerCol = predict.filter(col("prediction") === i)
-        println(s"Cluster $i)
+        println(s"Cluster $i")
        predictionsPerCol
        .select(col("_c0"), col("features"), col("prediction"))
        .collect
