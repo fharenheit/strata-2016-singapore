@@ -99,11 +99,6 @@ object TopicModelingExample {
                         .transform(filteredTokens)
                         .select("docId", "features")
 
-    val mbf = {
-      val corpusSize = countVectors.count()
-      2.0 / maxIterations + 1.0 / corpusSize
-    }
-
     val lda = new LDA()
                   .setOptimizer("online")
                   .setK(numTopics)
