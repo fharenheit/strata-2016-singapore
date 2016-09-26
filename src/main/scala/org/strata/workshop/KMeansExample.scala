@@ -24,7 +24,6 @@ import org.apache.log4j.{Level, Logger}
 import org.apache.spark.ml.clustering.KMeans
 import org.apache.spark.ml.feature.{StandardScaler, VectorAssembler}
 import org.apache.spark.sql.functions._
-import org.apache.spark.sql.types._
 
 // $example off$
 import org.apache.spark.sql.SparkSession
@@ -42,43 +41,6 @@ object KMeansExample {
       .appName("KMeansExample")
       .master("local")
       .getOrCreate()
-
-    val customSchema = StructType(Array(
-      StructField("symboling", StringType, true),
-      StructField("normalized-losses", StringType, true),
-      StructField("make", StringType, true),
-
-      StructField("fuel-type", StringType, true),
-      StructField("aspiration", StringType, true),
-
-      StructField("num-of-doors", StringType, true),
-      StructField("body-style", StringType, true),
-
-      StructField("drive-wheels", StringType, true),
-      StructField("engine-location", StringType, true),
-
-      StructField("wheel-base", StringType, true),
-      StructField("length", StringType, true),
-      StructField("width", StringType, true),
-      StructField("height", StringType, true),
-      StructField("curb-weight", StringType, true),
-
-      StructField("engine-type", StringType, true),
-      StructField("num-of-cylinders", StringType, true),
-      StructField("engine-size", StringType, true),
-      StructField("fuel-system", StringType, true),
-      StructField("bore", StringType, true),
-      StructField("stroke", StringType, true),
-
-      StructField("compression-ratio", StringType, true),
-
-      StructField("horsepower", StringType, true),
-      StructField("peak-rpm", StringType, true),
-      StructField("city-mpg", IntegerType, true),
-      StructField("highway-mpg", IntegerType, true),
-      StructField("price", IntegerType, true)
-
-    ))
 
     val ds = spark.read.option("inferSchema", "true").option("header", "true").option("nullValue", "?").csv("data/mtcars.csv")
 
@@ -116,7 +78,7 @@ object KMeansExample {
   
 
     // Evaluate clustering by computing Within Set Sum of Squared Errors.
-    val WSSSE = model.computeCost(assemdata)
+    val WSSSE = model.computeCost(scaledData)
     println(s"Within Set Sum of Squared Errors = $WSSSE")
 
     // Shows the result.
@@ -124,7 +86,7 @@ object KMeansExample {
     model.clusterCenters.foreach(println)
 
     // predict
-    val predict = model.transform(assemdata)
+    val predict = model.transform(scaledData)
     predict.show(1000)
     
     for (i <- 0 to clusters) { 
