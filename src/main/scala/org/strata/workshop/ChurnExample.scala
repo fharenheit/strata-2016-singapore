@@ -20,6 +20,7 @@ package org.strata.workshop
 
 // $example on$
 
+import org.apache.log4j.{Level, Logger}
 import org.apache.spark.ml.classification.RandomForestClassifier
 import org.apache.spark.ml.evaluation.BinaryClassificationEvaluator
 import org.apache.spark.ml.feature.{StringIndexer, VectorAssembler}
@@ -32,6 +33,10 @@ import org.apache.spark.sql.SparkSession
 object ChurnExample {
 
   def main(args: Array[String]) {
+
+    Logger.getLogger("org").setLevel(Level.OFF)
+    Logger.getLogger("akka").setLevel(Level.OFF)
+
     val spark = SparkSession
       .builder
       .appName("ChurnExample")

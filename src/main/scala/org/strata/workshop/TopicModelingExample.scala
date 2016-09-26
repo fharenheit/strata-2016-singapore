@@ -34,6 +34,7 @@ package org.strata.workshop
  * limitations under the License.
  */
 
+import org.apache.log4j.{Level, Logger}
 import org.apache.spark.ml.feature.{CountVectorizer, RegexTokenizer, StopWordsRemover}
 import org.apache.spark.ml.clustering._
 import org.apache.spark.{SparkContext, SparkConf}
@@ -49,6 +50,9 @@ import org.apache.spark.sql._
 object TopicModelingExample {
 
 	def main (args: Array[String]) {
+
+    Logger.getLogger("org").setLevel(Level.OFF)
+    Logger.getLogger("akka").setLevel(Level.OFF)
 
     var inputDir = "data/topicmodeling/newsgroup_20/"
     var stopWordFile = "data/topicmodeling/stopwords.txt"

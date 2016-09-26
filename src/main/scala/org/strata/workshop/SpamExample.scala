@@ -20,12 +20,11 @@ package org.strata.workshop
 
 // $example on$
 
+import org.apache.log4j.{Level, Logger}
 import org.apache.spark.ml.classification.LogisticRegression
-import org.apache.spark.ml.evaluation.RegressionEvaluator
-import org.apache.spark.ml.feature._
-import org.apache.spark.ml.recommendation.ALS
-import org.apache.spark.sql.types._
 import org.apache.spark.ml.evaluation.BinaryClassificationEvaluator
+import org.apache.spark.ml.feature._
+import org.apache.spark.sql.types._
 
 // $example off$
 import org.apache.spark.sql.SparkSession
@@ -34,12 +33,15 @@ import org.apache.spark.sql.SparkSession
 object SpamExample {
 
   def main(args: Array[String]) {
+
+    Logger.getLogger("org").setLevel(Level.OFF)
+    Logger.getLogger("akka").setLevel(Level.OFF)
+
     val spark = SparkSession
       .builder
       .appName("SpamExample")
       .master("local")
       .getOrCreate()
-    import spark.implicits._
 
     val customSchema = StructType(Array(
       StructField("spam", StringType, true),

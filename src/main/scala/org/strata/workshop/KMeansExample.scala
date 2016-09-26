@@ -20,13 +20,11 @@ package org.strata.workshop
 
 // $example on$
 
+import org.apache.log4j.{Level, Logger}
 import org.apache.spark.ml.clustering.KMeans
-import org.apache.spark.ml.feature.VectorAssembler
-import org.apache.spark.sql._
-import org.apache.spark.sql.types._
+import org.apache.spark.ml.feature.{StandardScaler, VectorAssembler}
 import org.apache.spark.sql.functions._
-
-import org.apache.spark.ml.feature.StandardScaler
+import org.apache.spark.sql.types._
 
 // $example off$
 import org.apache.spark.sql.SparkSession
@@ -35,14 +33,15 @@ import org.apache.spark.sql.SparkSession
 object KMeansExample {
 
   def main(args: Array[String]) {
+
+    Logger.getLogger("org").setLevel(Level.OFF)
+    Logger.getLogger("akka").setLevel(Level.OFF)
     
     val spark = SparkSession
       .builder
       .appName("KMeansExample")
       .master("local")
       .getOrCreate()
-      
-    import spark.implicits._
 
     val customSchema = StructType(Array(
       StructField("symboling", StringType, true),

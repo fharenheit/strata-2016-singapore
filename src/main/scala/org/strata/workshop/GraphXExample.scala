@@ -1,5 +1,6 @@
 package org.strata.workshop
 
+import org.apache.log4j.{Level, Logger}
 import org.apache.spark._
 import org.apache.spark.graphx._
 import org.apache.spark.graphx.util.GraphGenerators
@@ -12,6 +13,9 @@ import org.apache.spark.sql.SparkSession
 object GraphXExample {
 
   def main(args: Array[String]): Unit = {
+
+    Logger.getLogger("org").setLevel(Level.OFF)
+    Logger.getLogger("akka").setLevel(Level.OFF)
 
     val session = SparkSession
       .builder

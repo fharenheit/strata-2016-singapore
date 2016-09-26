@@ -19,6 +19,7 @@
 package org.strata.workshop
 
 // $example on$
+import org.apache.log4j.{Level, Logger}
 import org.apache.spark.ml.evaluation.RegressionEvaluator
 import org.apache.spark.ml.recommendation.ALS
 // $example off$
@@ -43,6 +44,10 @@ object ALSExample {
   // $example off$
 
   def main(args: Array[String]) {
+
+    Logger.getLogger("org").setLevel(Level.OFF)
+    Logger.getLogger("akka").setLevel(Level.OFF)
+
     val spark = SparkSession
       .builder
       .appName("ALSExample")

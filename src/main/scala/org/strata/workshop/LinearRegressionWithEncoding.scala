@@ -34,16 +34,15 @@ package org.strata.workshop
  */
 
 
-import org.apache.spark.ml.feature.{StringIndexer, VectorAssembler, OneHotEncoder}
+import org.apache.log4j.{Level, Logger}
+import org.apache.spark.ml.Pipeline
+import org.apache.spark.ml.evaluation.RegressionEvaluator
+import org.apache.spark.ml.feature.{OneHotEncoder, StringIndexer, VectorAssembler}
+import org.apache.spark.ml.regression.LinearRegression
 import org.apache.spark.ml.tuning.{ParamGridBuilder, TrainValidationSplit}
-import org.apache.spark.ml.evaluation.{RegressionEvaluator}
-import org.apache.spark.ml.regression.{LinearRegression}
-import org.apache.spark.{SparkContext, SparkConf}
+import org.apache.spark.mllib.evaluation.RegressionMetrics
 import org.apache.spark.sql._
 import org.apache.spark.sql.functions._
-import org.apache.spark.ml.Pipeline
-import org.apache.spark.mllib.evaluation.RegressionMetrics
-import org.apache.spark.ml.feature.StandardScaler
 
 object LinearRegressionWithEncoding {
 
@@ -53,6 +52,9 @@ object LinearRegressionWithEncoding {
                 fullbase: String, gashw: String, airco: String, garagepl: Double, prefarea: String)
 
  def main (args: Array[String]) {
+
+   Logger.getLogger("org").setLevel(Level.OFF)
+   Logger.getLogger("akka").setLevel(Level.OFF)
 
    var input = "data/Housing.csv"
    if (args.length > 0) {
@@ -98,6 +100,8 @@ object LinearRegressionWithEncoding {
             .setMaxIter(1000)
             .setSolver("l-bfgs")
 
+
+
   val paramGrid = new ParamGridBuilder()
             .addGrid(lr.regParam, Array(0.1, 0.01, 0.001))
             .addGrid(lr.fitIntercept)
@@ -121,7 +125,6 @@ object LinearRegressionWithEncoding {
   val Array(training, test) = data.randomSplit(Array(0.75, 0.25), seed = 12345)
 
   val model = tvs.fit(training)
-
 
   //val holdout = model.transform(test).select("prediction","price")
    val holdout = model.transform(test).select("prediction", "price").orderBy(abs(col("prediction")-col("price")))
