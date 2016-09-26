@@ -74,6 +74,7 @@ c
 came
 can
 cannot
+cantaloupe
 case
 cases
 certain
