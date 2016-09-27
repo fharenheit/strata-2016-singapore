@@ -86,15 +86,22 @@ object GraphXExample {
   }
 
   def pregel(sc : SparkContext) {
+
+    // Generate a graph whose vertex out degree distribution is log normal
     val graph: Graph[Long, Double] =
       GraphGenerators.logNormalGraph(sc, numVertices = 100).mapEdges(e => e.attr.toDouble)
 
     val sourceId: VertexId = 42 // The ultimate source
+
     // Initialize the graph such that all vertices except the root have distance infinity.
     val initialGraph = graph.mapVertices((id, _) =>
         if (id == sourceId) 0.0 else Double.PositiveInfinity)
+
+    // Pregel
     val sssp = initialGraph.pregel(Double.PositiveInfinity)(
+
       (id, dist, newDist) => math.min(dist, newDist), // Vertex Program
+
       triplet => {  // Send Message
         if (triplet.srcAttr + triplet.attr < triplet.dstAttr) {
           Iterator((triplet.dstId, triplet.srcAttr + triplet.attr))
@@ -102,8 +109,11 @@ object GraphXExample {
           Iterator.empty
         }
       },
+
       (a, b) => math.min(a, b) // Merge Message
     )
+
+    println("Single Source Shortest Path")
     println(sssp.vertices.collect.mkString("\n"))
 
   }
