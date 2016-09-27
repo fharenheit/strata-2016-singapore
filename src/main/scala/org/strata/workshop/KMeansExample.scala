@@ -41,11 +41,7 @@ object KMeansExample {
       .appName("KMeansExample")
       .master("local")
       .getOrCreate()
-<<<<<<< HEAD
 
-=======
-      
->>>>>>> ca2681d8eca650a959be306bd00edc547f8386a0
     val ds = spark.read.option("inferSchema", "true").option("header", "true").option("nullValue", "?").csv("data/mtcars.csv")
 
     ds.printSchema()
