@@ -42,7 +42,7 @@ object GraphXExample {
 
     // Count all users which are postdocs
     var count = graph.vertices.filter { case (id, (name, pos)) => pos == "postdoc"}.count
-    println("count is " + count)
+    println("count of postdoc vertics " + count)
 
     // Count all the edges where src > dst
     count = graph.edges.filter(e => e.srcId > e.dstId).count
@@ -54,18 +54,22 @@ object GraphXExample {
     ).collect.foreach(println(_))
 
     // Remove franklin
+    println("Subgraph")
     val subgraph = graph.subgraph(vpred = (id, attr) => attr._1 != "franklin")
     println(subgraph.vertices.collect.mkString("\n"))
 
     // connected components
+    println("Connected Components")
     val cc = subgraph.connectedComponents()
     cc.vertices.collect().foreach(println(_))
 
     // triangle counting
+    println("Triangle Counts")
     val triCounts = graph.triangleCount()
     triCounts.vertices.collect().foreach(println(_))
 
     // Compute the PageRank
+    println("PageRank")
     val pagerankGraph = graph.pageRank(0.001)
     pagerankGraph.vertices.collect().foreach(println(_))
 
