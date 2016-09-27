@@ -14,7 +14,7 @@ object GraphXExample {
     Logger.getLogger("org").setLevel(Level.OFF)
     Logger.getLogger("akka").setLevel(Level.OFF)
 
-    val session = SparkSession
+    val spark = SparkSession
       .builder
       .appName("KMeans")
       .master("local")
@@ -22,7 +22,7 @@ object GraphXExample {
 
 
     // Assume the SparkContext has already been constructed
-    val sc: SparkContext = session.sparkContext
+    val sc: SparkContext = spark.sparkContext
 
     // Create an RDD for the vertices
     val users: RDD[(VertexId, (String, String))] =
