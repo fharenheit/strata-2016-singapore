@@ -42,45 +42,6 @@ object KMeansExample {
       .master("local")
       .getOrCreate()
       
-    import spark.implicits._
-
-    /** val customSchema = StructType(Array(
-      StructField("symboling", StringType, true),
-      StructField("normalized-losses", StringType, true),
-      StructField("make", StringType, true),
-
-      StructField("fuel-type", StringType, true),
-      StructField("aspiration", StringType, true),
-
-      StructField("num-of-doors", StringType, true),
-      StructField("body-style", StringType, true),
-
-      StructField("drive-wheels", StringType, true),
-      StructField("engine-location", StringType, true),
-
-      StructField("wheel-base", StringType, true),
-      StructField("length", StringType, true),
-      StructField("width", StringType, true),
-      StructField("height", StringType, true),
-      StructField("curb-weight", StringType, true),
-
-      StructField("engine-type", StringType, true),
-      StructField("num-of-cylinders", StringType, true),
-      StructField("engine-size", StringType, true),
-      StructField("fuel-system", StringType, true),
-      StructField("bore", StringType, true),
-      StructField("stroke", StringType, true),
-
-      StructField("compression-ratio", StringType, true),
-
-      StructField("horsepower", StringType, true),
-      StructField("peak-rpm", StringType, true),
-      StructField("city-mpg", IntegerType, true),
-      StructField("highway-mpg", IntegerType, true),
-      StructField("price", IntegerType, true)
-
-    ))*/
-
     val ds = spark.read.option("inferSchema", "true").option("header", "true").option("nullValue", "?").csv("data/mtcars.csv")
 
     ds.printSchema()
