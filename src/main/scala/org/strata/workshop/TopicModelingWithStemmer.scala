@@ -84,23 +84,19 @@ object TopicModelingWithStemmer {
    	   .appName("TopicModelingWithStemmer")
    	   .master("local")
   	   .getOrCreate()
-    
-    val sc = new SparkContext(sparkConf)
 
+    import spark.implicits._
+  
     val numTopics: Int = args(2).toInt
     val numNgrams: Int = args(3).toInt
 
     val maxIterations: Int = 1000
     val vocabSize: Int = 2000
 
-    val sqlContext = new org.apache.spark.sql.SQLContext(sc)
-
-    import sqlContext.implicits._
-
 
     val rawEmailDF = sqlContext.read.avro(inputDir)
     val DF = rawEmailDF.rdd.map(_.getString(0)).zipWithIndex().toDF("text","docId")
-    //val test = docDF.take(10)
+    
     val docDF = DF.withColumn("text", a1(DF.col("text"))).cache
 
 
@@ -118,7 +114,7 @@ object TopicModelingWithStemmer {
                     .setOutputCol("words")
                     .transform(stemmed)
     //tokens.show()
-    val stopwords = sc.textFile(stopWordFile).collect
+    val stopwords = spark.sparkContext.textFile(stopWordFile).collect
     val filteredTokens = new StopWordsRemover()
                           .setStopWords(stopwords)
                           .setCaseSensitive(false)
