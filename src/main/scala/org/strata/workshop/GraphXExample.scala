@@ -87,11 +87,28 @@ object GraphXExample {
 
   def pregel(sc : SparkContext) {
 
-    // Generate a graph whose vertex out degree distribution is log normal
-    val graph: Graph[Long, Double] =
-      GraphGenerators.logNormalGraph(sc, numVertices = 100).mapEdges(e => e.attr.toDouble)
+    // Create an RDD for the vertices
+    val users: RDD[(VertexId, (String, Double))] =
+    sc.parallelize(Array((3L, ("rxin", 0.0)), (7L, ("jgonzal", 0.0)),
+      (5L, ("franklin", 0.0)), (2L, ("istoica", 0.0))))
 
-    val sourceId: VertexId = 42 // The ultimate source
+    // Create an RDD for edges
+    val relationships: RDD[Edge[Double]] =
+    sc.parallelize(Array(Edge(3L, 7L, 5.0), Edge(5L, 3L, 3.0),
+      Edge(2L, 5L, 2.0), Edge(5L, 7L, 1.0)))
+
+    // Define a default user in case there are relationship with missing user
+    val defaultUser = ("John Doe", 0.0)
+
+    // Build the initial Graph
+    val graph = Graph(users, relationships, defaultUser)
+
+
+    graph.triplets.map(
+      triplet => "SrcId : " + triplet.srcAttr + " Distance : " + triplet.attr + " DstId : " + triplet.dstAttr
+    ).collect.foreach(println(_))
+
+    val sourceId: VertexId = 2 // The ultimate source
 
     // Initialize the graph such that all vertices except the root have distance infinity.
     val initialGraph = graph.mapVertices((id, _) =>
