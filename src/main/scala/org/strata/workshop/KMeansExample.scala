@@ -41,7 +41,11 @@ object KMeansExample {
       .appName("KMeansExample")
       .master("local")
       .getOrCreate()
+<<<<<<< HEAD
 
+=======
+      
+>>>>>>> ca2681d8eca650a959be306bd00edc547f8386a0
     val ds = spark.read.option("inferSchema", "true").option("header", "true").option("nullValue", "?").csv("data/mtcars.csv")
 
     ds.printSchema()
@@ -90,10 +94,13 @@ object KMeansExample {
     predict.show(1000)
     
     for (i <- 0 to clusters) { 
-      predict.filter(col("prediction") === i)
+        val predictionsPerCol = predict.filter(col("prediction") === i)
+        println(s"Cluster $i")
+       predictionsPerCol
        .select(col("_c0"), col("features"), col("prediction"))
        .collect
        .foreach(println)
+       println("======================================================")
     }
 
     spark.stop()

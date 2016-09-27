@@ -103,11 +103,6 @@ object TopicModelingExample {
                         .transform(filteredTokens)
                         .select("docId", "features")
 
-    val mbf = {
-      val corpusSize = countVectors.count()
-      2.0 / maxIterations + 1.0 / corpusSize
-    }
-
     val lda = new LDA()
                   .setOptimizer("online")
                   .setK(numTopics)
@@ -121,7 +116,7 @@ object TopicModelingExample {
     println(s"Training time (sec)\t$elapsed")
     println(s"==========")
 
-    val topicIndices = ldaModel.describeTopics(maxTermsPerTopic = 10)
+    val topicIndices = ldaModel.describeTopics(maxTermsPerTopic = 10).coalesce(1)
     val vocabArray = cvModel.vocabulary
     
     for(i <- topicIndices) { println(s"Topic ${i(0)}")
