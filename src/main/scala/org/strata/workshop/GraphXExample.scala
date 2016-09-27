@@ -7,9 +7,6 @@ import org.apache.spark.graphx.util.GraphGenerators
 import org.apache.spark.rdd.RDD
 import org.apache.spark.sql.SparkSession
 
-/**
- * Created by jayantshekhar on 9/16/16.
- */
 object GraphXExample {
 
   def main(args: Array[String]): Unit = {
