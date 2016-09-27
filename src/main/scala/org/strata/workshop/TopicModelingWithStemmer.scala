@@ -79,12 +79,12 @@ object TopicModelingWithStemmer {
       stopWordFile = args(1)
     }
 
-    val sparkConf = new SparkConf().setAppName("TopicModelingWithStemmer")
-        sparkConf.setMaster("local[8]")
-                .set("spark.broadcast.compress", "false")
-                .set("spark.shuffle.compress", "false")
-                .set("spark.shuffle.spill.compress", "false")
-                 .set("spark.io.compression.codec", "lzf")
+	val spark = SparkSession
+   	   .builder
+   	   .appName("TopicModelingWithStemmer")
+   	   .master("local")
+  	   .getOrCreate()
+    
     val sc = new SparkContext(sparkConf)
 
     val numTopics: Int = args(2).toInt
