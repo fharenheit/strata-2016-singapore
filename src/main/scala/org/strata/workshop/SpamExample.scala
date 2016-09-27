@@ -107,7 +107,6 @@ object SpamExample {
     // evaluate
     val evaluator = new BinaryClassificationEvaluator()
       .setRawPredictionCol("prediction")
-      .setMetricName("precision")
 
     val accuracy = evaluator.evaluate(predict)
     println("Test Error = " + (1.0 - accuracy))
