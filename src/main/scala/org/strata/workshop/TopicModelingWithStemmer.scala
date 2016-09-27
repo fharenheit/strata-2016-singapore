@@ -16,7 +16,7 @@
  * limitations under the License.
  */
 
-package org.apache.strata
+package org.strata.workshop
 
 /*
  * Licensed to the Apache Software Foundation (ASF) under one or more
@@ -60,12 +60,12 @@ import org.apache.log4j.Level
 object TopicModelingWithStemmer {
   val a1 = udf ({ text: String =>
 
-    text.replace("UNCLASSIFIED U.S. Department of State Case No.","A")
+   /** text.replace("UNCLASSIFIED U.S. Department of State Case No.","A")
       .replace("F-2015-04841", "A")
       .replace("Doc No.", "A")
       .replaceAll("[^A-Za-z ]", " ")
   }
-  )
+  )*/
 
 	def main (args: Array[String]) {
     Logger.getLogger("org").setLevel(Level.OFF)
