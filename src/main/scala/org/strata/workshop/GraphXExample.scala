@@ -75,6 +75,7 @@ object GraphXExample {
 
 
     // The reverse operator returns a new graph with all the edge directions reversed.
+    println("Reverse")
     val reverse = graph.reverse
     reverse.triplets.map(
       triplet => triplet.toString()
