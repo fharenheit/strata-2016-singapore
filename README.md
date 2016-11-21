@@ -31,7 +31,7 @@ tar -zxvf spark-2.0.0-bin-hadoop2.7.tgz
 - run from command prompt:
     - C:\hadoop\bin\winutils.exe chmod 777 /tmp/hive
 - run spark-shell from command prompt with extra conf parameter
-    - spark-shell —driver-memory 2G —executor-memory 3G —executor-cores 2 —conf spark.sql.warehouse.dir=file:///c:/tmp/spark-warehouse
+    - spark-shell --driver-memory 2G --executor-memory 3G --executor-cores 2 -conf spark.sql.warehouse.dir=file:///c:/tmp/spark-warehouse
 
 ## Git
 
