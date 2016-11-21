@@ -22,6 +22,17 @@ Add the spark bin directory to Path : ...\spark-2.0.0-bin-hadoop2.7\bin
 
 tar -zxvf spark-2.0.0-bin-hadoop2.7.tgz
 
+## Set up winutils.exe on Windows
+
+- download winutils.exe from https://github.com/steveloughran/winutils/tree/master/hadoop-2.6.0/bin
+- move it to c:\hadoop\bin
+- set HADOOP_HOME in your environment variables
+    - HADOOP_HOME = C:\hadoop
+- run from command prompt:
+    - C:\hadoop\bin\winutils.exe chmod 777 /tmp/hive
+- run spark-shell from command prompt with extra conf parameter
+    - spark-shell —driver-memory 2G —executor-memory 3G —executor-cores 2 —conf spark.sql.warehouse.dir=file:///c:/tmp/spark-warehouse
+
 ## Git
 
 Nice to have
