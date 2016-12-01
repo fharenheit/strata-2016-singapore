@@ -43,6 +43,16 @@ Have the following downloaded before the session
 * JDK installed (> 1.7.x)
 * https://github.com/WhiteFangBuck/strata-2016-ny
 
+## Running spark-shell
+
+- export PATH=$PATH:/Users/path_to_downloaded_spark/spark-2.0.2-bin-hadoop2.7/bin
+- spark-shell
+
+### Paste in spark-shell
+
+scala> :paste
+// Entering paste mode (ctrl-D to finish)
+
 
 
 
