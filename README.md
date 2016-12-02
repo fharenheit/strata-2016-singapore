@@ -1,4 +1,4 @@
-# Strata-2016-NYC
+# Strata-2016-SINGAPORE
 
 ## Pre-requisites for Installation
 
