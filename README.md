@@ -41,7 +41,7 @@ Nice to have
 Have the following downloaded before the session
 * Spark binaries
 * JDK installed (> 1.7.x)
-* https://github.com/WhiteFangBuck/strata-2016-ny
+* https://github.com/WhiteFangBuck/strata-2016-singapore
 
 ## Running spark-shell
 
