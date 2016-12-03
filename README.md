@@ -53,6 +53,12 @@ Have the following downloaded before the session
 scala> :paste
 // Entering paste mode (ctrl-D to finish)
 
+## IntelliJ
+
+- Install IntelliJ from https://www.jetbrains.com/idea/download/
+- Add the scala plugin
+- Import the code as a maven project
+
 
 
 
