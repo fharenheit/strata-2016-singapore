@@ -55,6 +55,8 @@ scala> :paste
 
 ## IntelliJ
 
+The code can be run either in spark-shell or IntelliJ
+
 - Install IntelliJ from https://www.jetbrains.com/idea/download/
 - Add the scala plugin
 - Import the code as a maven project
