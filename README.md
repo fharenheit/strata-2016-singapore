@@ -55,6 +55,10 @@ The code can be run either in spark-shell or IntelliJ
 - Add the scala language plugin
 - Import the code as a maven project
 
+## Scala IDE for Eclipse
+
+- If using Eclipse, do use Scala IDE for Eclipse available at : http://scala-ide.org/download/sdk.html
+
 ## Summary of Downloads needed
 
 Have the following downloaded before the session
