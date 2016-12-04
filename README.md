@@ -6,7 +6,7 @@ Below are the steps for running in spark-shell or in IntelliJ/Scala IDE for Ecli
 
 ## Pre-requisites for Installation
 
-Java installed on the laptop
+Java/JDK 1.7+ has to be installed on the laptop before proceeding with the steps below.
 
 ## Running in spark-shell
 
