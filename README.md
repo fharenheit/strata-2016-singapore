@@ -37,11 +37,6 @@ Add the spark bin directory to Path : ...\spark-2.0.2-bin-hadoop2.7\bin
 
 Nice to have
 
-[IMPORTANT]: Downloads
-Have the following downloaded before the session
-* Spark binaries
-* JDK installed (> 1.7.x)
-* https://github.com/WhiteFangBuck/strata-2016-singapore
 
 ## Running spark-shell
 
@@ -60,6 +55,13 @@ The code can be run either in spark-shell or IntelliJ
 - Install IntelliJ from https://www.jetbrains.com/idea/download/
 - Add the scala plugin
 - Import the code as a maven project
+
+## Downloads
+
+Have the following downloaded before the session
+- Spark binaries
+- JDK installed (> 1.7.x)
+- https://github.com/WhiteFangBuck/strata-2016-singapore
 
 
 
