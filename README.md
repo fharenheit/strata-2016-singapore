@@ -22,6 +22,11 @@ tar -zxvf spark-2.0.2-bin-hadoop2.7.tgz
 
 export PATH=$PATH:/Users/path_to_downloaded_spark/spark-2.0.2-bin-hadoop2.7/bin
 
+### Running spark-shell on mac
+
+- export PATH=$PATH:/Users/path_to_downloaded_spark/spark-2.0.2-bin-hadoop2.7/bin
+- spark-shell
+
 ### Install Spark 2.0.2 on Windows
 
 Unzip spark-2.0.2-bin-hadoop2.7.tgz
@@ -39,11 +44,6 @@ Add the spark bin directory to Path : ...\spark-2.0.2-bin-hadoop2.7\bin
 - run spark-shell from command prompt with extra conf parameter
     - spark-shell --driver-memory 2G --executor-memory 3G --executor-cores 2 -conf spark.sql.warehouse.dir=file:///c:/tmp/spark-warehouse
 
-
-### Running spark-shell
-
-- export PATH=$PATH:/Users/path_to_downloaded_spark/spark-2.0.2-bin-hadoop2.7/bin
-- spark-shell
 
 ### Pasting code in spark-shell
 
