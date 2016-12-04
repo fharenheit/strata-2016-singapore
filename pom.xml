@@ -3,7 +3,7 @@
   <groupId>org.strata.workshop</groupId>
   <artifactId>spark-strata</artifactId>
   <modelVersion>4.0.0</modelVersion>
-  <name>strata-nyc-2016</name>
+  <name>strata-2016-singapore</name>
   <packaging>jar</packaging>
   <version>1.0</version>
 
