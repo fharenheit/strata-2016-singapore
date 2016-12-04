@@ -45,7 +45,9 @@ Add the spark bin directory to Path : ...\spark-2.0.2-bin-hadoop2.7\bin
 - export PATH=$PATH:/Users/path_to_downloaded_spark/spark-2.0.2-bin-hadoop2.7/bin
 - spark-shell
 
-### Paste in spark-shell
+### Pasting code in spark-shell
+
+When pasting larger sections of the code in spark-shell, use the below:
 
 scala> :paste
 
