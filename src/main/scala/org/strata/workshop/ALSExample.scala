@@ -25,13 +25,6 @@ import org.apache.spark.ml.recommendation.ALS
 // $example off$
 import org.apache.spark.sql.SparkSession
 
-/**
- * An example demonstrating ALS.
- * Run with
- * {{{
- * bin/run-example ml.ALSExample
- * }}}
- */
 object ALSExample {
 
   // $example on$
