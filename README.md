@@ -1,24 +1,24 @@
-# Strata-2016-NYC
+# Strata-2016-SINGAPORE
 
 ## Pre-requisites for Installation
 
 Java installed on the laptop
 
-## Download Spark 2.0
+## Download Spark 2.0.2
 
-Download Spark 2.0 from here : http://spark.apache.org/downloads.html
+Download Spark 2.0.2 from here : http://spark.apache.org/downloads.html
 
 Direct Download link : http://d3kbcqa49mib13.cloudfront.net/spark-2.0.2-bin-hadoop2.7.tgz
 
-## Install Spark 2.0 on Mac
+## Install Spark 2.0.2 on Mac
 
 tar -zxvf spark-2.0.2-bin-hadoop2.7.tgz
 
 export PATH=$PATH:/Users/path_to_downloaded_spark/spark-2.0.2-bin-hadoop2.7/bin
 
-## Install Spark 2.0 on Windows
+## Install Spark 2.0.2 on Windows
 
-tar -zxvf spark-2.0.2-bin-hadoop2.7
+Unzip spark-2.0.2-bin-hadoop2.7.tgz
 
 Add the spark bin directory to Path : ...\spark-2.0.2-bin-hadoop2.7\bin
 
@@ -37,11 +37,6 @@ Add the spark bin directory to Path : ...\spark-2.0.2-bin-hadoop2.7\bin
 
 Nice to have
 
-[IMPORTANT]: Downloads
-Have the following downloaded before the session
-* Spark binaries
-* JDK installed (> 1.7.x)
-* https://github.com/WhiteFangBuck/strata-2016-ny
 
 ## Running spark-shell
 
@@ -51,7 +46,21 @@ Have the following downloaded before the session
 ### Paste in spark-shell
 
 scala> :paste
-// Entering paste mode (ctrl-D to finish)
+
+## IntelliJ
+
+The code can be run either in spark-shell or IntelliJ
+
+- Install IntelliJ from https://www.jetbrains.com/idea/download/
+- Add the scala language plugin
+- Import the code as a maven project
+
+## Summary of Downloads needed
+
+Have the following downloaded before the session
+- Spark binaries
+- JDK installed (> 1.7.x)
+- https://github.com/WhiteFangBuck/strata-2016-singapore
 
 
 

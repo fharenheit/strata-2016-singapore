@@ -92,9 +92,15 @@ object TopicModelingExample {
                           .setInputCol("words")
                           .setOutputCol("filtered")
                           .transform(tokens)
+		
+   val ngram = new NGram().setN(numNgrams)
+                  .setInputCol("filtered")
+                  .setOutputCol("ngrams")
+                  .transform(filteredTokens)
+
 
     val cvModel = new CountVectorizer()
-                    .setInputCol("filtered")
+                    .setInputCol("ngrams")
                     .setOutputCol("features")
                     .setVocabSize(vocabSize)
                     .fit(filteredTokens)
