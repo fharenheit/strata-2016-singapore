@@ -18,7 +18,7 @@ export PATH=$PATH:/Users/path_to_downloaded_spark/spark-2.0.2-bin-hadoop2.7/bin
 
 ## Install Spark 2.0 on Windows
 
-tar -zxvf spark-2.0.2-bin-hadoop2.7
+Unzip spark-2.0.2-bin-hadoop2.7.tgz
 
 Add the spark bin directory to Path : ...\spark-2.0.2-bin-hadoop2.7\bin
 
@@ -46,7 +46,6 @@ Nice to have
 ### Paste in spark-shell
 
 scala> :paste
-// Entering paste mode (ctrl-D to finish)
 
 ## IntelliJ
 
