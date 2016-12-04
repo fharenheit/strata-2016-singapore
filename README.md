@@ -49,7 +49,7 @@ Add the spark bin directory to Path : ...\spark-2.0.2-bin-hadoop2.7\bin
 
 scala> :paste
 
-## IDE
+## Running in IDE
 
 If you prefer to use IDE over spark-shell, below are the steps.
 
@@ -59,11 +59,12 @@ You can either use IntelliJ or Scala IDE for Eclipse.
 
 - Install IntelliJ from https://www.jetbrains.com/idea/download/
 - Add the scala language plugin
-- Import the code as a maven project
+- Import the code as a maven project and let it build
 
 ### Scala IDE for Eclipse
 
 - If using Eclipse, do use Scala IDE for Eclipse available at : http://scala-ide.org/download/sdk.html
+- Import the code as a maven project and let it build
 
 ## Summary of Downloads needed
 
