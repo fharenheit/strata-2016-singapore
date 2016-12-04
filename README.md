@@ -2,7 +2,7 @@
 
 This tutorial can either be run in spark-shell or in an IDE (IntelliJ or Scala IDE for Eclipse)
 
-Below are the steps for running in spark-shell or in IntelliJ/Scala IDE for Eclipse
+Below are the steps for the setup.
 
 ## Pre-requisites for Installation
 
