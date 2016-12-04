@@ -35,9 +35,9 @@ package org.strata.workshop
  */
 
 import org.apache.log4j.{Level, Logger}
-import org.apache.spark.ml.feature.{CountVectorizer, RegexTokenizer, StopWordsRemover}
+import org.apache.spark.ml.feature.{CountVectorizer, NGram, RegexTokenizer, StopWordsRemover}
 import org.apache.spark.ml.clustering._
-import org.apache.spark.{SparkContext, SparkConf}
+import org.apache.spark.{SparkConf, SparkContext}
 import org.apache.spark.sql._
 /**
   * Infer the cluster topics on a set of 20 newsgroup data.
@@ -93,7 +93,7 @@ object TopicModelingExample {
                           .setOutputCol("filtered")
                           .transform(tokens)
 		
-   val ngram = new NGram().setN(numNgrams)
+   val ngram = new NGram()
                   .setInputCol("filtered")
                   .setOutputCol("ngrams")
                   .transform(filteredTokens)
