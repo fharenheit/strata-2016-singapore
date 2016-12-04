@@ -1,10 +1,14 @@
 # Strata-2016-SINGAPORE
 
+This tutorial can either be run in spark-shell or in an IDE (IntelliJ or Scala IDE for Eclipse)
+
+Below are the steps for running in spark-shell or in IntelliJ/Scala IDE for Eclipse
+
 ## Pre-requisites for Installation
 
 Java installed on the laptop
 
-## Install Spark
+## Running in spark-shell
 
 ### Download Spark 2.0.2
 
@@ -24,7 +28,7 @@ Unzip spark-2.0.2-bin-hadoop2.7.tgz
 
 Add the spark bin directory to Path : ...\spark-2.0.2-bin-hadoop2.7\bin
 
-### Set up winutils.exe on Windows
+### Set up winutils.exe on Windows (not needed on mac)
 
 - download winutils.exe from https://github.com/steveloughran/winutils/tree/master/hadoop-2.6.0/bin
 - move it to c:\hadoop\bin
@@ -36,7 +40,7 @@ Add the spark bin directory to Path : ...\spark-2.0.2-bin-hadoop2.7\bin
     - spark-shell --driver-memory 2G --executor-memory 3G --executor-cores 2 -conf spark.sql.warehouse.dir=file:///c:/tmp/spark-warehouse
 
 
-## Running spark-shell
+### Running spark-shell
 
 - export PATH=$PATH:/Users/path_to_downloaded_spark/spark-2.0.2-bin-hadoop2.7/bin
 - spark-shell
