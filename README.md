@@ -24,7 +24,6 @@ export PATH=$PATH:/Users/path_to_downloaded_spark/spark-2.0.2-bin-hadoop2.7/bin
 
 ### Running spark-shell on mac
 
-- export PATH=$PATH:/Users/path_to_downloaded_spark/spark-2.0.2-bin-hadoop2.7/bin
 - spark-shell
 
 ### Install Spark 2.0.2 on Windows
