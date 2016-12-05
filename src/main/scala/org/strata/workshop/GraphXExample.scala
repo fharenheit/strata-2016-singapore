@@ -64,12 +64,13 @@ object GraphXExample {
     val cc = subgraph.connectedComponents()
     cc.vertices.collect().foreach(println(_))
 
-    // triangle counting
+    // triangle counting. Determines the number of triangles passing through each vertex, providing a measure of clustering.
     println("Triangle Counts")
     val triCounts = graph.triangleCount()
     triCounts.vertices.collect().foreach(println(_))
 
-    // Compute the PageRank
+    // Compute the PageRank. PageRank measures the importance of each vertex in a graph, assuming an edge from u to v
+    // represents an endorsement of v’s importance by u. For example, if a Twitter user is followed by many others, the user will be ranked highly.
     println("PageRank")
     val pagerankGraph = graph.pageRank(0.001)
     pagerankGraph.vertices.collect().foreach(println(_))
