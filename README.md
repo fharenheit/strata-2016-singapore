@@ -2,7 +2,7 @@
 
 This tutorial can either be run in spark-shell or in an IDE (IntelliJ or Scala IDE for Eclipse)
 
-Below are the steps for running in spark-shell or in IntelliJ/Scala IDE for Eclipse
+Below are the steps for the setup.
 
 ## Pre-requisites for Installation
 
@@ -22,6 +22,10 @@ tar -zxvf spark-2.0.2-bin-hadoop2.7.tgz
 
 export PATH=$PATH:/Users/path_to_downloaded_spark/spark-2.0.2-bin-hadoop2.7/bin
 
+### Running spark-shell on mac
+
+- spark-shell
+
 ### Install Spark 2.0.2 on Windows
 
 Unzip spark-2.0.2-bin-hadoop2.7.tgz
@@ -40,16 +44,13 @@ Add the spark bin directory to Path : ...\spark-2.0.2-bin-hadoop2.7\bin
     - spark-shell --driver-memory 2G --executor-memory 3G --executor-cores 2 -conf spark.sql.warehouse.dir=file:///c:/tmp/spark-warehouse
 
 
-### Running spark-shell
+### Pasting code in spark-shell
 
-- export PATH=$PATH:/Users/path_to_downloaded_spark/spark-2.0.2-bin-hadoop2.7/bin
-- spark-shell
-
-### Paste in spark-shell
+When pasting larger sections of the code in spark-shell, use the below:
 
 scala> :paste
 
-## IDE
+## Running in IDE
 
 If you prefer to use IDE over spark-shell, below are the steps.
 
@@ -59,17 +60,19 @@ You can either use IntelliJ or Scala IDE for Eclipse.
 
 - Install IntelliJ from https://www.jetbrains.com/idea/download/
 - Add the scala language plugin
-- Import the code as a maven project
+- Import the code as a maven project and let it build
 
 ### Scala IDE for Eclipse
 
 - If using Eclipse, do use Scala IDE for Eclipse available at : http://scala-ide.org/download/sdk.html
+- Import the code as a maven project and let it build
 
 ## Summary of Downloads needed
 
 Have the following downloaded before the session
-- Spark binaries
+
 - JDK installed (> 1.7.x)
+- Spark binaries
 - https://github.com/WhiteFangBuck/strata-2016-singapore
 
 
