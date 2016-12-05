@@ -23,7 +23,8 @@ package org.strata.workshop
 import org.apache.log4j.{Level, Logger}
 import org.apache.spark.ml.classification.RandomForestClassifier
 import org.apache.spark.ml.evaluation.BinaryClassificationEvaluator
-import org.apache.spark.ml.feature.{StringIndexer, VectorAssembler}
+import org.apache.spark.ml.feature.{LabeledPoint, StringIndexer, VectorAssembler}
+import org.apache.spark.mllib.evaluation.MulticlassMetrics
 import org.apache.spark.sql.types._
 
 // $example off$
@@ -76,7 +77,7 @@ object ChurnExample {
     ))
 
     // read in the data into a DataFrame
-    val ds = spark.read.option("inferSchema", "true").schema(customSchema).csv("data/churn.all")
+    val ds = spark.read.option("inferSchema", "false").schema(customSchema).csv("data/churn.all")
     ds.printSchema()
 
     // index the intl_plan column
@@ -111,7 +112,7 @@ object ChurnExample {
     val rf = new RandomForestClassifier()
       .setLabelCol("churned_idx")
       .setFeaturesCol("features")
-      .setNumTrees(10)
+      .setNumTrees(30)
 
     // Fit the model
     val rfModel = rf.fit(trainingData)
@@ -129,6 +130,17 @@ object ChurnExample {
 
     val accuracy = evaluator.evaluate(predict)
     println("Test Error = " + (1.0 - accuracy))
+
+    import spark.implicits._
+
+    // evaluate the model
+    val predictionsAndLabels = predict.select("prediction", "churned_idx")
+      .map(row => (row.getDouble(0), row.getDouble(1)))
+
+    // compute confusion matrix
+    val metrics = new MulticlassMetrics(predictionsAndLabels.rdd)
+    println("\nConfusion matrix:")
+    println(metrics.confusionMatrix)
 
     spark.stop()
   }
