@@ -24,6 +24,7 @@ import org.apache.log4j.{Level, Logger}
 import org.apache.spark.ml.classification.LogisticRegression
 import org.apache.spark.ml.evaluation.BinaryClassificationEvaluator
 import org.apache.spark.ml.feature._
+import org.apache.spark.mllib.evaluation.MulticlassMetrics
 import org.apache.spark.sql.types._
 
 // $example off$
@@ -112,6 +113,17 @@ object SpamExample {
 
     val accuracy = evaluator.evaluate(predict)
     println("Test Error = " + (1.0 - accuracy))
+
+    import spark.implicits._
+
+    // evaluate the model
+    val predictionsAndLabels = predict.select("prediction", "label")
+      .map(row => (row.getDouble(0), row.getDouble(1)))
+
+    // compute confusion matrix
+    val metrics = new MulticlassMetrics(predictionsAndLabels.rdd)
+    println("\nConfusion matrix:")
+    println(metrics.confusionMatrix)
 
     spark.stop()
   }
