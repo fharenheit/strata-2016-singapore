@@ -58,7 +58,8 @@ object GraphXExample {
     val subgraph = graph.subgraph(vpred = (id, attr) => attr._1 != "franklin")
     println(subgraph.vertices.collect.mkString("\n"))
 
-    // connected components
+    // connected components. The connected components algorithm labels each connected component of the graph with the ID of its lowest-numbered vertex.
+    // For example, in a social network, connected components can approximate clusters.
     println("Connected Components")
     val cc = subgraph.connectedComponents()
     cc.vertices.collect().foreach(println(_))
