@@ -50,13 +50,13 @@ object SpamExample {
 
     ))
 
-    val ds = spark.read.option("inferSchema", "true").option("delimiter", "\t").schema(customSchema).csv("data/SMSSpamCollection.tsv")
+    val ds = spark.read.option("inferSchema", "false").option("delimiter", "\t").schema(customSchema).csv("data/SMSSpamCollection.tsv")
 
     ds.printSchema()
 
     ds.show(8)
 
-    // label
+    // string indexer
     val indexer = new StringIndexer()
       .setInputCol("spam")
       .setOutputCol("label")
@@ -82,6 +82,8 @@ object SpamExample {
     val idfModel = idf.fit(tfdata)
     val idfdata = idfModel.transform(tfdata)
 
+    idfdata.show()
+
     // assembler
     val assembler = new VectorAssembler()
       .setInputCols(Array("idf"))
@@ -95,7 +97,6 @@ object SpamExample {
     val lr = new LogisticRegression()
       .setLabelCol("label")
       .setFeaturesCol("features")
-
 
     // Fit the model
     val lrModel = lr.fit(trainingData)
@@ -116,11 +117,10 @@ object SpamExample {
 
     import spark.implicits._
 
-    // evaluate the model
+    // compute confusion matrix
     val predictionsAndLabels = predict.select("prediction", "label")
       .map(row => (row.getDouble(0), row.getDouble(1)))
-
-    // compute confusion matrix
+    
     val metrics = new MulticlassMetrics(predictionsAndLabels.rdd)
     println("\nConfusion matrix:")
     println(metrics.confusionMatrix)
