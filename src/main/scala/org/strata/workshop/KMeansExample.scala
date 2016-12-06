@@ -31,77 +31,78 @@ import org.apache.spark.sql.SparkSession
 // https://forge.scilab.org/index.php/p/rdataset/source/tree/master/csv/datasets/mtcars.csv
 object KMeansExample {
 
-  def main(args: Array[String]) {
+    def main(args: Array[String]) {
 
-    Logger.getLogger("org").setLevel(Level.OFF)
-    Logger.getLogger("akka").setLevel(Level.OFF)
-    
-    val spark = SparkSession
-      .builder
-      .appName("KMeansExample")
-      .master("local")
-      .getOrCreate()
+        Logger.getLogger("org").setLevel(Level.OFF)
+        Logger.getLogger("akka").setLevel(Level.OFF)
 
-    val ds = spark.read.option("inferSchema", "true").option("header", "true").option("nullValue", "?").csv("data/mtcars.csv")
+        val spark = SparkSession
+            .builder
+            .appName("KMeansExample")
+            .master("local")
+            .getOrCreate()
 
-    ds.printSchema()
-    ds.show()
+        val ds = spark.read.option("inferSchema", "true").option("header", "true").option("nullValue", "?").csv("data/mtcars.csv")
 
-    // vector assembler
-    val assembler = new VectorAssembler()
-      .setInputCols(Array("mpg", "cyl", "disp", "hp", "drat", "wt"))
-      .setOutputCol("features")
-      
-      val assemdata = assembler.transform(ds)
-       
-     val scaled = new StandardScaler()
-       .setInputCol("features")
-       .setOutputCol("scaledFeatures")
-       .setWithStd(true)
-       .setWithMean(true)
- 
-     // Compute summary statistics by fitting the StandardScaler.
-     val scalerModel = scaled.fit(assemdata)
- 
-     // Normalize each feature to have unit standard deviation.
-     val scaledData = scalerModel.transform(assemdata)
-  
-     val clusters = 10
-      // Trains a k-means model
-     val kmeans = new KMeans()
-       .setK(clusters)
-       .setMaxIter(1000)
-       .setFeaturesCol("scaledFeatures")
-       .setPredictionCol("prediction")
-       
-    val model = kmeans.fit(scaledData)
-  
+        ds.printSchema()
+        ds.show()
 
-    // Evaluate clustering by computing Within Set Sum of Squared Errors.
-    val WSSSE = model.computeCost(scaledData)
-    println(s"Within Set Sum of Squared Errors = $WSSSE")
+        // vector assembler
+        val assembler = new VectorAssembler()
+            .setInputCols(Array("mpg", "cyl", "disp", "hp", "drat", "wt"))
+            .setOutputCol("features")
 
-    // Shows the result.
-    println("Cluster Centers: ")
-    model.clusterCenters.foreach(println)
+        val assemdata = assembler.transform(ds)
 
-    // predict
-    val predict = model.transform(scaledData)
-    predict.show(1000)
-    
-    for (i <- 0 to clusters) { 
-        val predictionsPerCol = predict.filter(col("prediction") === i)
-        println(s"Cluster $i")
-       predictionsPerCol
-       .select(col("_c0"), col("features"), col("prediction"))
-       .collect
-       .foreach(println)
-       println("======================================================")
+        val scaled = new StandardScaler()
+            .setInputCol("features")
+            .setOutputCol("scaledFeatures")
+            .setWithStd(true)
+            .setWithMean(true)
+
+        // Compute summary statistics by fitting the StandardScaler.
+        val scalerModel = scaled.fit(assemdata)
+
+        // Normalize each feature to have unit standard deviation.
+        val scaledData = scalerModel.transform(assemdata)
+
+        val clusters = 10
+        // Trains a k-means model
+        val kmeans = new KMeans()
+            .setK(clusters)
+            .setMaxIter(1000)
+            .setFeaturesCol("scaledFeatures")
+            .setPredictionCol("prediction")
+
+        val model = kmeans.fit(scaledData)
+
+
+        // Evaluate clustering by computing Within Set Sum of Squared Errors.
+        val WSSSE = model.computeCost(scaledData)
+        println(s"Within Set Sum of Squared Errors = $WSSSE")
+
+        // Shows the result.
+        println("Cluster Centers: ")
+        model.clusterCenters.foreach(println)
+
+        // predict
+        val predict = model.transform(scaledData)
+        predict.show(1000)
+
+        for (i <- 0 to clusters) {
+            val predictionsPerCol = predict.filter(col("prediction") === i)
+            println(s"Cluster $i")
+            predictionsPerCol
+                .select(col("_c0"), col("features"), col("prediction"))
+                .collect
+                .foreach(println)
+            println("======================================================")
+        }
+
+        spark.stop()
     }
-
-    spark.stop()
-  }
 }
+
 // scalastyle:on println
 
 
